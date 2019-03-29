@@ -192,6 +192,12 @@ def make_shape_node(shape):
         ele.append(etree.Element('zplane', rmin=rsize(shape.rmin), rmax=rsize(shape.rmax), z=dsize(zneg)))
         return ele
 
+    if typename == 'Torus':
+        dat = dict(name=shape.name, lunit=lunit, aunit=aunit, 
+                   rmin=rsize(shape.rmin), rmax=rsize(shape.rmax), rtor=rsize(shape.rtor),
+                   startphi=ang(shape.startphi), deltaphi=ang(shape.deltaphi))
+        return etree.Element('torus', **dat)
+
     if typename == 'Boolean':
         ele = etree.Element(shape.type, name=shape.name)
         # the rest are sub nodes.  why?  because, don't ask questions!
